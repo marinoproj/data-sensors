@@ -1,0 +1,2 @@
+#!/bin/sh
+java -jar data_sensors.jar server config.yml
