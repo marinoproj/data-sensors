@@ -112,4 +112,12 @@ public class DataUtilsService {
 
     }
 
+    public List<DataDevice> findByDeviceId(long deviceId){
+        return dataDeviceService.getAllDataDeviceByDeviceId(deviceId);
+    }
+
+    public Optional<DataDevice> findById(long id){
+        return dataDeviceService.getById(id);
+    }
+
 }

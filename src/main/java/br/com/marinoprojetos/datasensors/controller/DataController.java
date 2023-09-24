@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("v1/data")
@@ -31,6 +32,16 @@ public class DataController {
     @PutMapping
     public ResponseEntity<DataDevice> update(@RequestBody RequestPutDataDTO request){
         return ResponseEntity.ok(dataUtilsService.update(request));
+    }
+
+    @GetMapping("/device/{deviceId}")
+    public ResponseEntity<List<DataDevice>> findByDeviceId(@PathVariable long deviceId){
+        return ResponseEntity.ok(dataUtilsService.findByDeviceId(deviceId));
+    }
+
+    @GetMapping("/{dataId}")
+    public ResponseEntity<Optional<DataDevice>> findByDataId(@PathVariable long dataId){
+        return ResponseEntity.ok(dataUtilsService.findById(dataId));
     }
 
 }
