@@ -113,11 +113,23 @@ public class DataUtilsService {
     }
 
     public List<DataDevice> findByDeviceId(long deviceId){
-        return dataDeviceService.getAllDataDeviceByDeviceId(deviceId);
+        List<DataDevice> response = dataDeviceService.getAllDataDeviceByDeviceId(deviceId);
+        response.forEach(obj -> {
+            if (obj.getCurrentValueData() != null){
+                obj.getCurrentValueData().setDataDevice(null);
+            }
+        });
+        return response;
     }
 
     public Optional<DataDevice> findById(long id){
-        return dataDeviceService.getById(id);
+        Optional<DataDevice> response = dataDeviceService.getById(id);
+        return response.map(obj -> {
+            if (obj.getCurrentValueData() != null){
+                obj.getCurrentValueData().setDataDevice(null);
+            }
+            return obj;
+        });
     }
 
 }

@@ -1,5 +1,7 @@
 package br.com.marinoprojetos.datasensors.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,9 +28,11 @@ public class ValueData {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_dado_dispositivo")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private DataDevice dataDevice;
 
     @Column(name = "dh_criacao")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime dhCreate;
 
 }

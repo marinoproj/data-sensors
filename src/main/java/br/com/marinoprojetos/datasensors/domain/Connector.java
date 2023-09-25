@@ -1,6 +1,8 @@
 package br.com.marinoprojetos.datasensors.domain;
 
 import br.com.marinoprojetos.datasensors.dto.response.ResponseHitecnologiaConnectorDTO;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -38,6 +40,7 @@ public class Connector {
     private boolean isConnected;
 
     @Column(name = "dh_exclusao")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime dhExclude;
 
     public static Connector toDTO(ResponseHitecnologiaConnectorDTO dto){

@@ -40,8 +40,8 @@ public class DataController {
     }
 
     @GetMapping("/{dataId}")
-    public ResponseEntity<Optional<DataDevice>> findByDataId(@PathVariable long dataId){
-        return ResponseEntity.ok(dataUtilsService.findById(dataId));
+    public ResponseEntity<DataDevice> findByDataId(@PathVariable long dataId){
+        return ResponseEntity.ok(dataUtilsService.findById(dataId).orElse(null));
     }
 
 }
