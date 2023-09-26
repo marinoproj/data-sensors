@@ -38,4 +38,9 @@ public class DeviceController {
         return ResponseEntity.ok(deviceUtilsService.update(request));
     }
 
+    @PutMapping("/{deviceId}/reading-time/{readingTime}")
+    public ResponseEntity<Device> updateReadingTime(@PathVariable long deviceId, @PathVariable long readingTime){
+        return ResponseEntity.ok(deviceUtilsService.updateReadingTime(deviceId, readingTime));
+    }
+
 }

@@ -116,4 +116,19 @@ public class DeviceUtilsService {
 
     }
 
+    public Device updateReadingTime(long deviceId, long readingTime){
+
+        Optional<Device> deviceOptional = deviceService.getById(deviceId);
+
+        if (!deviceOptional.isPresent()){
+            throw new GeneralInvalidException("error.update.device", "Dispositivo não encontrado");
+        }
+
+        Device device = deviceOptional.get();
+        device.setReadingTime(readingTime);
+
+        return deviceService.save(device);
+
+    }
+
 }
