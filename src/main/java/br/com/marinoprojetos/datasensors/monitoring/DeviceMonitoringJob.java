@@ -109,16 +109,27 @@ public class DeviceMonitoringJob extends Thread {
                         if (dataExternal.getCurrentValue() != null) {
 
                             ResponseHitecnologiaCurrentValueDTO currentValueExternal = dataExternal.getCurrentValue();
+                            LocalDateTime dhReading = LocalDateTime.parse(currentValueExternal.getDateTime(), DateTimeFormatter.ISO_DATE_TIME);
 
-                            Optional<ValueData> valueDataOptional = valueDataService.getByExternalId(currentValueExternal.getId());
+                            Optional<ValueData> valueDataCurrent = valueDataService.findFirstByDataDeviceIdOrderByDhReadingDesc(dataDevice.getId());
 
-                            if (!valueDataOptional.isPresent()) {
+                            boolean update = false;
+
+                            if (valueDataCurrent.isPresent()){
+                                if (valueDataCurrent.get().getDhReading().isBefore(dhReading)){
+                                    update = true;
+                                }
+                            } else {
+                                update = true;
+                            }
+
+                            if (update) {
 
                                 ValueData valueData = new ValueData();
 
                                 valueData.setExternalId(currentValueExternal.getId());
                                 valueData.setValue(currentValueExternal.getValue());
-                                valueData.setDhReading(LocalDateTime.parse(currentValueExternal.getDateTime(), DateTimeFormatter.ISO_DATE_TIME));
+                                valueData.setDhReading(dhReading);
                                 valueData.setDhCreate(LocalDateTime.now());
                                 valueData.setDataDevice(dataDevice);
                                 valueData = valueDataService.save(valueData);

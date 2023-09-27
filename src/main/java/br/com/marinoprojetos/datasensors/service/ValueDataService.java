@@ -30,4 +30,8 @@ public class ValueDataService {
         return valueDataRepository.findByExternalId(externalId);
     }
 
+    public Optional<ValueData> findFirstByDataDeviceIdOrderByDhReadingDesc(long dataDeviceId){
+        return valueDataRepository.findFirstByDataDeviceIdOrderByDhReadingDesc(dataDeviceId);
+    }
+
 }
