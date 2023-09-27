@@ -26,10 +26,6 @@ public class ValueDataService {
         return valueDataRepository.save(valueData);
     }
 
-    public Optional<ValueData> getByExternalId(long externalId){
-        return valueDataRepository.findByExternalId(externalId);
-    }
-
     public Optional<ValueData> findFirstByDataDeviceIdOrderByDhReadingDesc(long dataDeviceId){
         return valueDataRepository.findFirstByDataDeviceIdOrderByDhReadingDesc(dataDeviceId);
     }

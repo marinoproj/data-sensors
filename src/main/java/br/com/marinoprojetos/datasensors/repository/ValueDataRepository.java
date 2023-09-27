@@ -13,8 +13,6 @@ public interface ValueDataRepository extends CrudRepository<ValueData, Long> {
 
     List<ValueData> findByDataDeviceId(Long dataDeviceId);
 
-    Optional<ValueData> findByExternalId(Long externalId);
-
     Optional<ValueData> findFirstByDataDeviceIdOrderByDhReadingDesc(Long externalId);
 
 }
