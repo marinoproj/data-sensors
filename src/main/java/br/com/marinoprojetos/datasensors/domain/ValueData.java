@@ -17,9 +17,6 @@ public class ValueData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_externo")
-    private long externalId;
-
     @Column(name = "valor")
     private String value;
 

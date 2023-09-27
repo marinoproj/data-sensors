@@ -127,14 +127,13 @@ public class DeviceMonitoringJob extends Thread {
 
                                 ValueData valueData = new ValueData();
 
-                                valueData.setExternalId(currentValueExternal.getId());
                                 valueData.setValue(currentValueExternal.getValue());
                                 valueData.setDhReading(dhReading);
                                 valueData.setDhCreate(LocalDateTime.now());
                                 valueData.setDataDevice(dataDevice);
                                 valueData = valueDataService.save(valueData);
 
-                                LOG.info("monitoring device: {} insert new valuedata dataDevice: {} dataDeviceName: {} valueExternalId: {}", device.getId(), dataDevice.getId(), dataDevice.getExternalName(), valueData.getExternalId());
+                                LOG.info("monitoring device: {} insert new valuedata dataDevice: {} dataDeviceName: {}", device.getId(), dataDevice.getId(), dataDevice.getExternalName());
 
                                 dataDevice.setCurrentValueData(valueData);
                                 dataDeviceService.save(dataDevice);
